@@ -1,0 +1,14 @@
+﻿@using BlazorApp1.Data
+@inherits GuardianInfo
+@page "/guardian/guardian"
+@page "/guardian/{Id:int}"
+<PageTitle>Spotlight: @Details.Name</PageTitle>
+
+<div class="profile">
+    <img src="@Details.Portrait" alt="Profile-Pic" style="width:100%" />
+    <h1>@Details.Name</h1>
+    <h1>@Details.Age</h1>
+    <p class="Description">@Details.Description</p>
+    <p>@Details.Class</p>
+    <a href="/roster">Back to Table</a>
+</div>

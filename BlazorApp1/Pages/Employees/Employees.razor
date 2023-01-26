@@ -1,0 +1,75 @@
+﻿@page "/employees"
+@using BlazorApp1.Data
+@inject EmployeeService employeeService
+
+<NavLink class="nav-link" href="AddEmployee">
+    <span class="oi oi-plus" aria-hidden="true">Add New</span>
+
+</NavLink>
+
+<h1>Employee Info</h1>
+@if (EmpObj is null)
+{
+    <p><em>Loading.... !</em></p>
+}
+else
+{
+    <RadzenDataGrid AllowFiltering="true"
+                AllowColumnResize="true"
+                AllowAlternatingRows="false"
+                FilterMode="FilterMode.Advanced"
+                AllowSorting="true"
+                PageSize="5"
+                AllowPaging="true"
+                PagerHorizontalAlign="HorizontalAlign.Left"
+                ShowPagingSummary="true"
+                Data="@EmpObj"
+                TItem="Employee">
+        <Columns>
+            <RadzenDataGridColumn TItem="Employee" Property="Id" Title="Emp Id" Frozen="true" Width="160px" />
+            <RadzenDataGridColumn TItem="Employee" Property="EmployeeName" Title="Emp Name" Frozen="true" Width="160px" />
+            <RadzenDataGridColumn TItem="Employee" Property="Address" Title="Address" Frozen="true" Width="160px" />
+            <RadzenDataGridColumn TItem="Employee" Property="Role" Title="Role" Frozen="true" Width="160px" />
+            <RadzenDataGridColumn TItem="Employee" Title="Edit" Frozen="true" Width="50px">
+                <Template Context="data">
+                    <div >
+                        <span class="edit-icon"
+                          @onclick="@(() => GoToEdit(data.Id))">
+                            <RadzenIcon Icon="create" />
+                        </span>
+                    </div>
+                </Template>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Employee" Title="Delete" Frozen="true" Width="50px">
+                <Template Context="data">
+                    <div class="column-center column-pointer">
+                        <span class="cancel-icon"
+                          @onclick="@(() => GoToDelete(data.Id))"
+                          @onclick:stopPropagation="true"
+                          @onclick:preventDefault="true">
+                            <RadzenIcon Icon="delete_forever" />
+                        </span>
+                    </div>
+                </Template>
+            </RadzenDataGridColumn>
+        </Columns>
+    </RadzenDataGrid>
+}
+
+
+
+@code {
+    List<Employee>? EmpObj;
+    [Inject]
+    protected NavigationManager NavigationManager { get; set; } = default!;
+    protected override async Task OnInitializedAsync()
+    {
+        EmpObj = await Task.Run(() => employeeService.GetAllEmployeesAsync());
+    }
+    public void GoToEdit( int Id)
+        => NavigationManager.NavigateTo($"EditEmployee/{Id}");
+    public void GoToDelete(int Id)
+        => NavigationManager.NavigateTo($"DeleteEmployee/{Id}");
+
+    
+}

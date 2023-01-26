@@ -1,0 +1,13 @@
+﻿@using BlazorApp1.Data
+@inherits Draw
+@page "/firearm/weapon"
+@page "/firearm/{Id:int}"
+<PageTitle>Spotlight: @Drew.Name</PageTitle>
+
+<div class="profile">
+    <img src="@Drew.Portrait" alt="Profile-Pic" style="width:100%" />
+    <h1>@Drew.Name</h1>
+    <h1>@Drew.WeaponType</h1>
+    <p class="Description">@Drew.UsedBy</p>
+    <a href="/firearm">Back to Table</a>
+</div>

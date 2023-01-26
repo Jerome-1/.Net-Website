@@ -1,0 +1,47 @@
+﻿@page "/fizzbuzz"
+@inherits KataFizzBuzz
+
+<PageTitle>Fizzbuzz</PageTitle>
+<div class="row">
+    <div class="col-3">Fizz Value:</div>
+    <div class="col"><input type="number" @bind="@FizzValue" /></div>
+</div>
+<div class="row">
+    <div class="col-3">Buzz Value:</div>
+    <div class="col"><input type="number" @bind="@BuzzValue" /></div>
+</div>
+<div class="row">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="DoIt">FizzBuzz It</button>
+    </div>
+</div>
+
+@if (fizzy.Count() > 0)
+{
+    <div class="row pt-5">
+        <div class="table-responsive col">
+            <table class="table table-striped table-bordered table-hover table-sm">
+                <thead class="thead-dark">
+                    <tr><th colspan="10">Results for Fizz Buzz</th></tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < 100; i += 10)
+                    {
+                        <tr>
+                            <td class="@fizzy[i].Term">@fizzy[i].Value</td>
+                            <td class="@fizzy[i+1].Term">@fizzy[i + 1].Value</td>
+                            <td class="@fizzy[i+2].Term">@fizzy[i + 2].Value</td>
+                            <td class="@fizzy[i+3].Term">@fizzy[i + 3].Value</td>
+                            <td class="@fizzy[i+4].Term">@fizzy[i + 4].Value</td>
+                            <td class="@fizzy[i+5].Term">@fizzy[i + 5].Value</td>
+                            <td class="@fizzy[i+6].Term">@fizzy[i + 6].Value</td>
+                            <td class="@fizzy[i+7].Term">@fizzy[i + 7].Value</td>
+                            <td class="@fizzy[i+8].Term">@fizzy[i + 8].Value</td>
+                            <td class="@fizzy[i+9].Term">@fizzy[i + 9].Value</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

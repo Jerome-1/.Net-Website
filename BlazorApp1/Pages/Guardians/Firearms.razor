@@ -1,0 +1,25 @@
+﻿@page "/firearm"
+@inherits Weapons
+@using BlazorApp1.Data
+<h1>Recommended Firearms</h1>
+
+<RadzenDataGrid AllowFiltering="true"
+                AllowColumnResize="true"
+                AllowAlternatingRows="false"
+                FilterMode="FilterMode.Advanced"
+                AllowSorting="true"
+                PageSize="4"
+                AllowPaging="true"
+                PagerHorizontalAlign="HorizontalAlign.Left"
+                ShowPagingSummary="true"
+                Data="@_items"
+                TItem="RecommendedFirearms"
+                RowClick="(e => OnRowClicked(e.Data.Id))">
+    <Columns>
+        <RadzenDataGridColumn TItem="RecommendedFirearms" Property="Id" Title="Firearm Id" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="RecommendedFirearms" Property="Name" Title="Name" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="RecommendedFirearms" Property="WeaponType" Title="Type" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="RecommendedFirearms" Property="UsedBy" Title="Used By" Frozen="true" Width="300px" />
+    </Columns>
+
+</RadzenDataGrid>

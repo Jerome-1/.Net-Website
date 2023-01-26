@@ -1,0 +1,57 @@
+﻿@page "/AddEmployee"
+@using BlazorApp1.Data
+@inject EmployeeService employeeService
+
+
+<h2>Add New Employee</h2>
+
+<form>
+    <div>
+        <div>
+            <div>
+                <label for="Name">Name</label>
+                <input form="Name" @bind="obj.EmployeeName" />
+            </div>
+            <div>
+                <label for="Role"></label>
+                <select @bind="obj.Role">
+                    <option value="">Select Role</option>
+                    <option value="Basketballer">Basketballer</option>
+                    <option value="Footballer">Footballer</option>
+                    <option value="President">President</option>
+                </select>
+            </div>
+            <div>
+                <label for="Employer">Employer</label>
+                <input form="Employer" @bind="@obj.Employer" />
+            </div>
+            <div>
+                <label for="Address">Address</label>
+                <input form="Address" @bind="@obj.Address"/>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <div>
+                <input type="button" @onclick="@CreateEmployee" value="Save"/>
+                <input type="button" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@code {
+    Employee obj = new Employee();
+    [Inject]
+    protected NavigationManager NavigationManager { get; set; } = default!;
+    protected async void CreateEmployee()
+    {
+        await employeeService.InsertEmployeeAsync(obj);
+        NavigationManager.NavigateTo("employees");
+    }
+    void Cancel()
+        => NavigationManager.NavigateTo("employees");
+}
